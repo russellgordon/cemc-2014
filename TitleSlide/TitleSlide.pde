@@ -1,4 +1,3 @@
-import processing.core.PFont;
 /**
  * Brightness Thresholding 
  * by Golan Levin. 
@@ -12,14 +11,18 @@ import processing.core.PFont;
 // Required libraries 
 import processing.video.*; // for video
 import ddf.minim.*;        // for audio
+import processing.core.PFont;
 
 // Global variables
+// For video work...
 color black;
 color white;
 int numPixels;
 Capture video;
+// For audio work
 Minim minim;    // core Minim functionality accessed through this object
 AudioInput in;  // information picked up by microphone accessed through this object
+// For typography
 PFont helveticaBold;
 PFont helvetica;
 
@@ -27,9 +30,9 @@ PFont helvetica;
 void setup() {
 
   // Size of canvas
-  size(1024, 768); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
+  size(1024, 640); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
 
-    // This the default video input, see the GettingStartedCapture 
+  // This the default video input, see the GettingStartedCapture 
   // example if it creates an error
   video = new Capture(this, width, height);
 
@@ -72,18 +75,18 @@ void draw() {
 
   // Capture and filter the video image.
   if (video.available()) {
+    
     video.read();
     video.loadPixels();
     int threshold = 50; // Set the threshold value
     float pixelBrightness; // Declare variable to store a pixel's color
-    float maxPixelBrightness = 0;
+    
     // Turn each pixel in the video frame black or white depending on its brightness
     loadPixels();
     for (int i = 0; i < numPixels; i++) {
       pixelBrightness = brightness(video.pixels[i]);
-      if (maxPixelBrightness < pixelBrightness) {
-        maxPixelBrightness = pixelBrightness;
-      }
+
+      // Filter video image as long as no keys are pressed
       if (!keyPressed) {
         if (pixelBrightness > threshold) { // If the pixel is brighter than the
           video.pixels[i] = white; // threshold value, make it white
@@ -91,6 +94,7 @@ void draw() {
           video.pixels[i] = black; // make it black
         }
       }
+      
     }
 
     // Save changes to pixel array
@@ -102,6 +106,7 @@ void draw() {
     hue = 240 - hue;
 
     // Tint based on loudness of audio samples
+    // (only if no keys are pressed)
     if (keyPressed) {
       tint(white);
     } else {
@@ -111,7 +116,7 @@ void draw() {
     // Show the video image on screen
     image(video, 0, 0);
 
-    // Display presentation text
+    // Display presentation text in bottom corner of window
     textAlign(LEFT);
     textFont(helveticaBold, 48);
     fill(white);
