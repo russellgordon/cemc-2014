@@ -19,10 +19,10 @@ color black;
 color white;
 int numPixels;
 Capture video;
-// For audio work
+// For audio work...
 Minim minim;    // core Minim functionality accessed through this object
 AudioInput in;  // information picked up by microphone accessed through this object
-// For typography
+// For typography...
 PFont helveticaBold;
 PFont helvetica;
 
@@ -65,7 +65,7 @@ void setup() {
   //                   (smaller buffer, fewer samples, less to process, less lag time)
   in = minim.getLineIn( Minim.STEREO, 512 );
 
-  // Font for title of workshop
+  // Fonts for title of workshop
   helveticaBold = loadFont("Helvetica-Bold-48.vlw");
   helvetica = loadFont("Helvetica-24.vlw");
 }
@@ -79,7 +79,7 @@ void draw() {
     video.read();
     video.loadPixels();
     int threshold = 50; // Set the threshold value
-    float pixelBrightness; // Declare variable to store a pixel's color
+    float pixelBrightness; // Declare variable to store a pixel's brightness
     
     // Turn each pixel in the video frame black or white depending on its brightness
     loadPixels();
@@ -91,7 +91,7 @@ void draw() {
         if (pixelBrightness > threshold) { // If the pixel is brighter than the
           video.pixels[i] = white; // threshold value, make it white
         } else { // Otherwise,
-          video.pixels[i] = black; // make it black
+          video.pixels[i] = black; // make it black.
         }
       }
       
@@ -100,10 +100,10 @@ void draw() {
     // Save changes to pixel array
     video.updatePixels();
 
-    // Get the current level (amplitude) of all the samples in the buffer
+    // Get the current level (amplitude) of all the audio samples in the buffer
     float level = in.mix.level();
     float hue = map(level * 100, 0, 50, 0, 360);
-    hue = 240 - hue;
+    hue = 240 - hue; // low amplitude/volume is blue, high amplitude/volume is reddish
 
     // Tint based on loudness of audio samples
     // (only if no keys are pressed)
