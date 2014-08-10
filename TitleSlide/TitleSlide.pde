@@ -77,10 +77,12 @@ void draw() {
       if (maxPixelBrightness < pixelBrightness) {
         maxPixelBrightness = pixelBrightness;
       }
-      if (pixelBrightness > threshold) { // If the pixel is brighter than the
-        video.pixels[i] = white; // threshold value, make it white
-      } else { // Otherwise,
-        video.pixels[i] = black; // make it black
+      if (!keyPressed) {
+        if (pixelBrightness > threshold) { // If the pixel is brighter than the
+          video.pixels[i] = white; // threshold value, make it white
+        } else { // Otherwise,
+          video.pixels[i] = black; // make it black
+        }
       }
     }
 
@@ -93,7 +95,11 @@ void draw() {
     hue = 240 - hue;
 
     // Tint based on loudness of audio samples
-    tint(hue, 80, 90, 50);
+    if (keyPressed) {
+      tint(white);
+    } else {
+      tint(hue, 80, 90, 50);
+    }
 
     // Show the video image on screen
     image(video, 0, 0);
