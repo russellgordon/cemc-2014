@@ -1,3 +1,4 @@
+import processing.core.PFont;
 /**
  * Brightness Thresholding 
  * by Golan Levin. 
@@ -19,6 +20,8 @@ int numPixels;
 Capture video;
 Minim minim;    // core Minim functionality accessed through this object
 AudioInput in;  // information picked up by microphone accessed through this object
+PFont helveticaBold;
+PFont helvetica;
 
 // This function runs once.
 void setup() {
@@ -58,6 +61,10 @@ void setup() {
   //                   (basically, lag time between audio input and response on screen)
   //                   (smaller buffer, fewer samples, less to process, less lag time)
   in = minim.getLineIn( Minim.STEREO, 512 );
+
+  // Font for title of workshop
+  helveticaBold = loadFont("Helvetica-Bold-48.vlw");
+  helvetica = loadFont("Helvetica-24.vlw");
 }
 
 // This function runs repeatedly. 
@@ -103,6 +110,18 @@ void draw() {
 
     // Show the video image on screen
     image(video, 0, 0);
+
+    // Display presentation text
+    textAlign(LEFT);
+    textFont(helveticaBold, 48);
+    fill(white);
+    text("Using Processing to Attract", 50, height - 225);
+    text("Non-traditional Students", 50, height - 175);
+    text("to the CS Classroom", 50, height - 125);
+    textFont(helvetica, 24);
+    text("Russell Gordon", 50, height - 80);
+    text("Royal St. George's College, Toronto, Ontario", 50, height - 50);
+
   }
 }
 
