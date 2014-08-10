@@ -92,8 +92,8 @@ void draw() {
     float hue = map(level * 100, 0, 50, 0, 360);
     hue = 240 - hue;
 
-    // Tint based on loudness audio samples
-    tint(hue, 80, 90);
+    // Tint based on loudness of audio samples
+    tint(hue, 80, 90, 50);
 
     // Show the video image on screen
     image(video, 0, 0);
