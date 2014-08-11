@@ -1,4 +1,4 @@
-class EllipseTest {
+class ExampleClass {
 
   // Global variables
   int x = 0;
@@ -8,10 +8,7 @@ class EllipseTest {
   //
   // Purpose: Run once, when the class is instantiated and an object created.
   //
-  EllipseTest() {
-
-    // Size of canvas
-    size(800, 600); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
+  ExampleClass() {
 
     // Use HSB colour model.
     colorMode(HSB, 360, 100, 100);

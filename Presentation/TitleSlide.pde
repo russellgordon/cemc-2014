@@ -89,7 +89,7 @@ class TitleSlide {
 
       // Get the current level (amplitude) of all the audio samples in the buffer
       float level = in.mix.level();
-      float hue = map(level * 100, 0, 50, 0, 360);
+      float hue = map(level * 100, 0, 5, 0, 360);
       hue = 240 - hue; // low amplitude/volume is blue, high amplitude/volume is reddish
 
       // Tint based on loudness of audio samples

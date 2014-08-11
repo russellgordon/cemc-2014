@@ -1,6 +1,21 @@
 /*
  * A wrapper program that basically allows me to move
  * through various Processing programs as a slideshow.
+ *
+ * Complement for presentation given at CEMC Summer Institute 2014:
+ *
+ * http://cemc.uwaterloo.ca/events/csteachers.html
+ *
+ * Notes and resources to accompany this presentation can be found here:
+ *
+ * http://russellgordon.ca/cemc/2014/using-processing-to-attract-non-traditional-students-to-the-cs-classroom/index.html
+ *
+ * License for use applies to this file only.  License for use for this wrapper file:
+ *
+ * http://creativecommons.org/licenses/by-nc-sa/4.0/
+ *
+ * Class files utilized by this wrapper may have different licensing terms.  See header information in each
+ * class for details.
  */
 
 // Track what slide we are on
@@ -9,7 +24,7 @@ final int MAX_SLIDES = 2;
 
 // Variables for each slide
 TitleSlide slide1;
-EllipseTest slide2;
+SoftwareStructure3 slide2;
 
 // This runs once.
 void setup() {
@@ -33,8 +48,7 @@ void draw() {
   case 2:
     if (slide1 != null) {
       slide1 = null; // de-reference object for prior slide
-      slide2 = new EllipseTest();
-      size(800, 600);
+      slide2 = new SoftwareStructure3();
     }
     slide2.drawFrame();
     //println("case 2");
@@ -57,6 +71,15 @@ void keyPressed() {
       if (currentSlide > 1) {
         currentSlide--;
       }
+    }
+  } else {
+    switch(currentSlide) {
+
+    case 1:
+      break;
+    case 2:
+      slide2.keyPress();
+      break;
     }
   }
 }
