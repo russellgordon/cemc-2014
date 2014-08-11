@@ -20,7 +20,7 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 5;
+final int MAX_SLIDES = 6;
 
 // Variables for each slide
 TitleSlide slide1;
@@ -28,11 +28,15 @@ SoftwareStructure3 slide2;
 SpiralDoodle slide3;
 GOL slide4;
 SinusoidalFunctions slide5;
-SinusoidalFunctions slide6;
+BA slide6;
+BA slide7;
 
 
 // This runs once.
 void setup() {
+
+  // Size of canvas
+  size(1200, 640, P3D); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
 
   // Instantiate object for first slide.  
   slide1 = new TitleSlide(this);
@@ -91,7 +95,24 @@ void draw() {
     if (slide6 != null) {
       slide6 = null; // de-reference object for neighbouring slide
       slide5 = new SinusoidalFunctions();
+      // Size of canvas
+      size(1200, 640, P3D); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
     }
+    break;
+  case 6:
+    if (slide5 != null) {
+      slide5 = null; // de-reference object for neighbouring slide
+      slide6 = new BA();
+      //canvas size
+      size(485, 670, P3D);
+    }
+    if (slide7 != null) {
+      slide7 = null; // de-reference object for neighbouring slide
+      slide6 = new BA();
+      //canvas size
+      size(485, 670, P3D);
+    }
+    slide6.drawFrame();
     break;
   }
 }
@@ -128,6 +149,9 @@ void keyPressed() {
       break;
     case 5:
       slide5.keyPress();
+      break;
+    case 6:
+      slide6.keyPress();
       break;
     }
   }
