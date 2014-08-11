@@ -73,7 +73,6 @@ class SoftwareStructure3 {
   // mySetup
   //
   // Purpose: Sets up initial state of sketch.  Called from constructor or when sketch is reset.
-  //
   // 
   void mySetup() {
     // Color mode

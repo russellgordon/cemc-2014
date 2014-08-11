@@ -20,11 +20,13 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 2;
+final int MAX_SLIDES = 3;
 
 // Variables for each slide
 TitleSlide slide1;
 SoftwareStructure3 slide2;
+SpiralDoodle slide3;
+SpiralDoodle slide4;
 
 // This runs once.
 void setup() {
@@ -37,7 +39,6 @@ void setup() {
 void draw() {
 
   switch(currentSlide) {
-
   case 1:
     if (slide2 != null) {
       slide2 = null;
@@ -47,11 +48,25 @@ void draw() {
     break;
   case 2:
     if (slide1 != null) {
-      slide1 = null; // de-reference object for prior slide
+      slide1 = null; // de-reference object for neighbouring slide
+      slide2 = new SoftwareStructure3();
+    }
+    if (slide3 != null) {
+      slide3 = null; // de-reference object for neighbouring slide
       slide2 = new SoftwareStructure3();
     }
     slide2.drawFrame();
-    //println("case 2");
+    break;
+  case 3:
+    if (slide2 != null) {
+      slide2 = null; // de-reference object for neighbouring slide
+      slide3 = new SpiralDoodle();
+    }
+    if (slide4 != null) {
+      slide4 = null; // de-reference object for neighbouring slide
+      slide3 = new SpiralDoodle();
+    }
+    slide3.drawFrame();
     break;
   }
 }
@@ -79,6 +94,9 @@ void keyPressed() {
       break;
     case 2:
       slide2.keyPress();
+      break;
+    case 3:
+      slide3.keyPress();
       break;
     }
   }
