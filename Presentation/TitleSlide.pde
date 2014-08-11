@@ -20,7 +20,7 @@ class TitleSlide {
   //
   TitleSlide(PApplet parentWindow) {
     // Size of canvas
-    size(1024, 640); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
+    size(1200, 640); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
 
     // This the default video input, see the GettingStartedCapture 
     // example if it creates an error

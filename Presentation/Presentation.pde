@@ -20,13 +20,16 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 3;
+final int MAX_SLIDES = 5;
 
 // Variables for each slide
 TitleSlide slide1;
 SoftwareStructure3 slide2;
 SpiralDoodle slide3;
-SpiralDoodle slide4;
+GOL slide4;
+SinusoidalFunctions slide5;
+SinusoidalFunctions slide6;
+
 
 // This runs once.
 void setup() {
@@ -68,6 +71,28 @@ void draw() {
     }
     slide3.drawFrame();
     break;
+  case 4:
+    if (slide3 != null) {
+      slide3 = null; // de-reference object for neighbouring slide
+      slide4 = new GOL();
+    }
+    if (slide5 != null) {
+      slide5 = null; // de-reference object for neighbouring slide
+      slide4 = new GOL();
+    }
+    slide4.generate();
+    slide4.display();
+    break;
+  case 5:
+    if (slide4 != null) {
+      slide4 = null; // de-reference object for neighbouring slide
+      slide5 = new SinusoidalFunctions();
+    }
+    if (slide6 != null) {
+      slide6 = null; // de-reference object for neighbouring slide
+      slide5 = new SinusoidalFunctions();
+    }
+    break;
   }
 }
 
@@ -97,6 +122,12 @@ void keyPressed() {
       break;
     case 3:
       slide3.keyPress();
+      break;
+    case 4:
+      slide4.keyPress();
+      break;
+    case 5:
+      slide5.keyPress();
       break;
     }
   }
