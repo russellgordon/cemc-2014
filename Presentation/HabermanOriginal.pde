@@ -1,7 +1,7 @@
-class FooOriginal {
+class HabermanOriginal {
 
   // Contains the starting, or intial, word (axiom)
-  String axiom = "FFFX";
+  String axiom = "FF";
 
   // Contains the existing word
   String existingWord = "";
@@ -20,23 +20,23 @@ class FooOriginal {
   StringDict rules; 
 
   // Defines the line segment length for n = 0 (if we press 'd' to draw the axiom)
-  float lineLength = 30;
+  float lineLength = 300;
 
   // Will contain the line segment length for the current generation of the drawing
   float currentLineLength = 0;
 
   // Initial x-position of the turtle
-  int xPosition = 0;
+  int xPosition = 400;
 
   // Initial y-position of the turtle
   int yPosition = 0;
 
   // Initial direction of the turtle (0 degrees: right, 90 degrees: down, 180 degrees: left,
   //                                  270 degrees: up).
-  int direction = -180;
+  int direction = 90;
 
   // Angle of rotation for the turtle (when a + or a - is processed)
-  float angle = 25; 
+  float angle = 15; 
 
   // Optimal number of word re-writes that should occur
   // (You can directly control how many re-writes occur with the right arrow key)
@@ -57,7 +57,7 @@ class FooOriginal {
   //              xPos      Where the plant should be created, horizontally.
   //              yPos      Where the plant should be created, vertically.
   //              scaling   How much to scale plant drawing by. 1.0 = 'normal' size.
-  FooOriginal(int xPos, int yPos, float scaling, int maxRewrites) {
+  HabermanOriginal(int xPos, int yPos, float scaling, int maxRewrites) {
 
     // Set turtle starting position
     xPosition = xPos; 
@@ -91,10 +91,11 @@ class FooOriginal {
     //
     // Some L-systems have more than one rule for replacements.
     // Just add another ".set" line for additional rules
-    rules.set("F1", "F-F[1+F]F[2-F]"); //33%
-    rules.set("F2", "F[1+FF]F[--F]"); //33%
-    rules.set("F3", "FF[1++F]FF[2-F]"); //34%
-    rules.set("X", "F-F[3++F]F[1-F]");
+    rules.set("F1", "0F1[+FF][-FF]X"); //33% chance this version will be drawn
+    rules.set("F2", "0FF1[++FF][-FF]X"); //33% chance this version will be drawn
+    rules.set("F3", "0F1[+FF][-F-F]X"); //34% chance this version will be drawn
+
+    rules.set("X", "0F1[+FFF][-FFF]");
 
 
     // Before any re-writes, the existing word is set to the axiom
@@ -242,44 +243,54 @@ class FooOriginal {
 
     background(0, 0, 100);
 
+    //starting colour of tree
+    stroke(81, 103, 71);
+
     // Get the turtle into it's starting position 
     translate(xPosition, yPosition);
+    rotate(radians(direction));
 
     // Scale drawing
     scale(scaleBy);
 
-    // Rotate to starting position
-    rotate(radians(direction));
-
     // Set the line length for this round of drawing
-    currentLineLength = lineLength / pow(1.6, rewriteCount);
+    currentLineLength = lineLength / pow(1.5, rewriteCount);
 
     // Iterate  
-    for (currentCharacter= 0; currentCharacter < newWord.length (); currentCharacter++) {
+    for (currentCharacter= 0; currentCharacter < newWord.length(); currentCharacter++) {
 
-      // Check each character - draw or rotate as necessary
       if ( newWord.charAt(currentCharacter) == '+') {
         // Turn left      
         rotate(radians(-angle));
-      } else if ( newWord.charAt(currentCharacter) == '-') {
+      }
+      else if ( newWord.charAt(currentCharacter) == '-') {
         // Turn right
         rotate(radians(angle));
-      } else if ( newWord.charAt(currentCharacter) == '[') {
-        // Push (save) current position information onto transformation stack
+      }
+      else if ( newWord.charAt(currentCharacter) == '[') {
+        // Pushing (saving) current position and rotation 
+        //info onto the stack
         pushMatrix();
-      } else if ( newWord.charAt(currentCharacter) == ']') {
-        // Pop (remove) current position information from transformation stack 
+      }
+      else if ( newWord.charAt(currentCharacter) == ']') {
+        // Popping (removing) most recently saved location&rotation
+        // info from stack
         popMatrix();
-      } else if ( newWord.charAt(currentCharacter) == '0') {
-        // Pop (remove) the most recently saved location and rotation info from the stack
-        stroke(71, 255, 114);
-      } else if ( newWord.charAt(currentCharacter) == '1') {
-        // Pop (remove) the most recently saved location and rotation info from the stack
-        stroke(50, 171, 78);
-      } else if ( newWord.charAt(currentCharacter) == '2') {
-        // Pop (remove) the most recently saved location and rotation info from the stack
-        stroke(50, 98, 41);
-      } else {
+      }
+      //Colouring the tree
+      else if ( newWord.charAt(currentCharacter) == '0') {
+        //brown
+        stroke(72, 48, 43);
+      }
+      else if ( newWord.charAt(currentCharacter) == '1') {
+        //second shade green
+        stroke(81, 103, 71);
+      }
+      else if ( newWord.charAt(currentCharacter) == '2') {
+        //third shade green
+        stroke(61, 144, 60);
+      }
+      else {
         // Draw a segment
         line(0, 0, currentLineLength, 0);
         translate(currentLineLength, 0);

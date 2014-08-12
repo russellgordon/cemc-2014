@@ -20,7 +20,7 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 10;
+final int MAX_SLIDES = 11;
 
 // Variables for each slide
 TitleSlide slide1;
@@ -33,7 +33,7 @@ JH slide7;
 EC slide8;
 PixarImage slide9;
 FooOriginal slide10;
-FooOriginal slide11;
+HabermanOriginal slide11;
 
 // This runs once.
 void setup() {
@@ -167,6 +167,13 @@ void draw() {
       slide10.update();
     }
     break;
+  case 11:
+    if (slide10 != null) {
+      slide10 = null; // de-reference object for neighbouring slide
+      slide11 = new HabermanOriginal(width/2, height/2 - 200, 0.1, 4);
+      slide11.update();
+    }
+    break;
   }
 }
 
@@ -220,6 +227,9 @@ void keyPressed() {
       break;
     case 10:
       slide10.keyPress();
+      break;
+    case 11:
+      slide11.keyPress();
       break;
     }
   }
