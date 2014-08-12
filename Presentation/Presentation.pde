@@ -20,7 +20,7 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 9;
+final int MAX_SLIDES = 10;
 
 // Variables for each slide
 TitleSlide slide1;
@@ -32,7 +32,8 @@ BA slide6;
 JH slide7;
 EC slide8;
 PixarImage slide9;
-PixarImage slide10;
+FooOriginal slide10;
+FooOriginal slide11;
 
 // This runs once.
 void setup() {
@@ -154,6 +155,18 @@ void draw() {
     }
     slide9.drawFrame();
     break;
+  case 10:
+    if (slide9 != null) {
+      slide9 = null; // de-reference object for neighbouring slide
+      slide10 = new FooOriginal(width/2, height/2, 0.3, 5);
+      slide10.update();
+    }
+    if (slide11 != null) {
+      slide11 = null; // de-reference object for neighbouring slide
+      slide10 = new FooOriginal(width/2, height/2, 0.3, 5);
+      slide10.update();
+    }
+    break;
   }
 }
 
@@ -204,6 +217,9 @@ void keyPressed() {
       break;
     case 9:
       slide9.keyPress();
+      break;
+    case 10:
+      slide10.keyPress();
       break;
     }
   }
