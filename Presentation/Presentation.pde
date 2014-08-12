@@ -20,7 +20,7 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 8;
+final int MAX_SLIDES = 9;
 
 // Variables for each slide
 TitleSlide slide1;
@@ -31,8 +31,8 @@ SinusoidalFunctions slide5;
 BA slide6;
 JH slide7;
 EC slide8;
-EC slide9;
-
+PixarImage slide9;
+PixarImage slide10;
 
 // This runs once.
 void setup() {
@@ -58,6 +58,7 @@ void draw() {
   case 2:
     if (slide1 != null) {
       slide1 = null; // de-reference object for neighbouring slide
+      tint(0, 0, 100);
       slide2 = new SoftwareStructure3();
     }
     if (slide3 != null) {
@@ -142,6 +143,17 @@ void draw() {
     }
     slide8.drawFrame();
     break;
+  case 9:
+    if (slide8 != null) {
+      slide8 = null; // de-reference object for neighbouring slide
+      slide9 = new PixarImage();
+    }
+    if (slide10 != null) {
+      slide10 = null; // de-reference object for neighbouring slide
+      slide9 = new PixarImage();
+    }
+    slide9.drawFrame();
+    break;
   }
 }
 
@@ -189,6 +201,9 @@ void keyPressed() {
       break;
     case 8:
       slide8.keyPress();
+      break;
+    case 9:
+      slide9.keyPress();
       break;
     }
   }
