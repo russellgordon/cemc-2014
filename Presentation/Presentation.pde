@@ -39,7 +39,7 @@ HabermanOriginal slide11;
 void setup() {
 
   // Size of canvas
-  size(1200, 640, P3D); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
+  size(1200, 640); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
 
   // Instantiate object for first slide.  
   slide1 = new TitleSlide(this);
@@ -98,32 +98,23 @@ void draw() {
     }
     if (slide6 != null) {
       slide6 = null; // de-reference object for neighbouring slide
-      // Size of canvas
-      size(1200, 640, P3D); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
       slide5 = new SinusoidalFunctions();
     }
     break;
   case 6:
     if (slide5 != null) {
       slide5 = null; // de-reference object for neighbouring slide
-      //canvas size
-      size(485, 670, P3D);
-      slide6 = new BA();
+      slide6 = new BA(this);
     }
     if (slide7 != null) {
       slide7 = null; // de-reference object for neighbouring slide
-      //canvas size
-      size(485, 670, P3D);
-      frameRate(60);
-      slide6 = new BA();
+      slide6 = new BA(this);
     }
     slide6.drawFrame();
     break;
   case 7:
     if (slide6 != null) {
       slide6 = null; // de-reference object for neighbouring slide
-      // Size of canvas
-      size(1200, 640, P3D); // Change size to 320 x 240, 640 x 480, or 800 x 600 if too slow at 1024 x 768
       slide7 = new JH();
     }
     if (slide8 != null) {
@@ -179,7 +170,7 @@ void draw() {
 
 // This responds to keypresses
 void keyPressed() {
-  
+
   loop();
 
   if (key == CODED) {
@@ -214,7 +205,6 @@ void keyPressed() {
       slide5.keyPress();
       break;
     case 6:
-      slide6.keyPress();
       break;
     case 7:
       slide7.keyPress();
@@ -233,4 +223,8 @@ void keyPressed() {
       break;
     }
   }
+}
+
+void movieEvent(Movie m) {
+  m.read();
 }
