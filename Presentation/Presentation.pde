@@ -20,7 +20,7 @@
 
 // Track what slide we are on
 int currentSlide = 1;
-final int MAX_SLIDES = 7;
+final int MAX_SLIDES = 8;
 
 // Variables for each slide
 TitleSlide slide1;
@@ -30,7 +30,8 @@ GOL slide4;
 SinusoidalFunctions slide5;
 BA slide6;
 JH slide7;
-JH slide8;
+EC slide8;
+EC slide9;
 
 
 // This runs once.
@@ -125,9 +126,21 @@ void draw() {
     }
     if (slide8 != null) {
       slide8 = null; // de-reference object for neighbouring slide
+      frameRate(25);
       slide7 = new JH();
     }
     slide7.drawFrame();
+    break;
+  case 8:
+    if (slide7 != null) {
+      slide7 = null; // de-reference object for neighbouring slide
+      slide8 = new EC();
+    }
+    if (slide9 != null) {
+      slide9 = null; // de-reference object for neighbouring slide
+      slide8 = new EC();
+    }
+    slide8.drawFrame();
     break;
   }
 }
@@ -173,6 +186,9 @@ void keyPressed() {
       break;
     case 7:
       slide7.keyPress();
+      break;
+    case 8:
+      slide8.keyPress();
       break;
     }
   }

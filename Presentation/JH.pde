@@ -30,6 +30,8 @@ class JH {
     
     angle = 0;
     
+    stroke(0);
+    
     loop();
   }
 
